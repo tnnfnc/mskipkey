@@ -24,8 +24,11 @@ buildozer init and configure buildozer settings file: `buildozer.spec`
     
     # (list) Application requirements
     # comma separated e.g. requirements = sqlite3,kivy
-    requirements = python3,kivy,kivymd
+    requirements = python3,kivy,kivymd,certifi
 
+## Internet permissions
+    # (list) Permissions
+    android.permissions = INTERNET
 
 
 
