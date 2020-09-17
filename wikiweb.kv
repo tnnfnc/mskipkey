@@ -1,0 +1,74 @@
+<ContentNavigationDrawer>:
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    MDLabel:
+        text: "WikipediApp"
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    MDLabel:
+        text: "tnnfnc@gmail.com"
+        font_style: "Caption"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    ScrollView:
+
+Screen:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            id: toolbar
+            pos_hint: {"top": 1}
+            elevation: 10
+            title: "Wikipedia Navigator"
+            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+        NavigationLayout:
+            x: toolbar.height
+            
+            ScreenManager:
+                id: screen_manager
+
+                Screen:
+                    name: "search"
+                    BoxLayout:
+                        orientation: 'vertical'
+
+                        MDTextField:
+                            id: text
+                            hint_text: "Input search"
+                            helper_text: "Type here what you want to find"
+                            helper_text_mode: "on_focus"
+
+                        MDRaisedButton:
+                            id: find
+                            text: 'Find'
+                            size_hint_x: 1
+                            on_press: app.random_search()
+
+                        ScrollView:
+                            MDList:
+                                id: list
+
+                Screen:
+                    name: "display"
+
+                    RstDocument:
+                        id: detail
+
+                    MDFloatingActionButton:
+                        elevation_normal: 12
+                        pos_hint: {'right': 0.9, 'bottom': 0.9}
+                        md_bg_color: app.theme_cls.primary_color
+                        on_release: app.back()
+                
+
+            MDNavigationDrawer:
+                id: nav_drawer
+
+                ContentNavigationDrawer:
+
