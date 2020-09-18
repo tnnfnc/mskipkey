@@ -36,5 +36,9 @@ buildozer init and configure buildozer settings file: `buildozer.spec`
 
 buildozer -v android debug
 
+## Run and deploy 
+buildozer -v android debug deploy run logcat > my_log.txt
+
 ### Warnings
-\[WARNING\]: lld not found, linking without it. Consider installing lld if linker errors occur.
+1. \[WARNING\]: lld not found, linking without it. Consider installing lld if linker errors occur.
+1. reStructuredText renderer [class kivy.uix.rst.RstDocument](https://kivy.org/doc/stable/api-kivy.uix.rst.html?highlight=rstdocument#kivy.uix.rst.RstDocument) is not supported and the app doesn't run on the phone

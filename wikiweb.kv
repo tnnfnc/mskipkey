@@ -1,21 +1,23 @@
 <ContentNavigationDrawer>:
-    orientation: "vertical"
-    padding: "8dp"
-    spacing: "8dp"
-
-    MDLabel:
-        text: "WikipediApp"
-        font_style: "Button"
-        size_hint_y: None
-        height: self.texture_size[1]
-
-    MDLabel:
-        text: "tnnfnc@gmail.com"
-        font_style: "Caption"
-        size_hint_y: None
-        height: self.texture_size[1]
-
     ScrollView:
+        MDList:
+
+            OneLineListItem:
+                text: "Search"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
+
+            OneLineListItem:
+                text: "Detail"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
+
+<AdaptableLabel>:
+    size_hint_y: None
+    height: self.texture_size[1]
+    # height: '200dp'
 
 Screen:
     BoxLayout:
@@ -24,17 +26,17 @@ Screen:
             id: toolbar
             pos_hint: {"top": 1}
             elevation: 10
-            title: "Wikipedia Navigator"
-            left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+            title: "Menu"
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
 
         NavigationLayout:
             x: toolbar.height
-            
+
             ScreenManager:
                 id: screen_manager
 
                 Screen:
-                    name: "search"
+                    name: "scr 1"
                     BoxLayout:
                         orientation: 'vertical'
 
@@ -54,21 +56,34 @@ Screen:
                             MDList:
                                 id: list
 
+
                 Screen:
-                    name: "display"
+                    name: "scr 2"
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDLabel:
+                            id: selected_title
+                            text: 'Search title'
+                            font_style: "Button"
+                            size_hint: 1, None
 
-                    RstDocument:
-                        id: detail
+                        ScrollView:
+                            BoxLayout:
+                                orientation: 'vertical'
+                                id: long_text
+                                size_hint_y: None
+                                height: self.minimum_height
 
-                    MDFloatingActionButton:
-                        elevation_normal: 12
-                        pos_hint: {'right': 0.9, 'bottom': 0.9}
-                        md_bg_color: app.theme_cls.primary_color
-                        on_release: app.back()
-                
+                            # MDLabel:
+                            #     id: detail
+                            #     text: 'Detail wikipedia found here!'
+                            #     padding_x: '10dp'
+                            #     size_hint_y: None
+                            #     height: self.texture_size[1]
 
             MDNavigationDrawer:
                 id: nav_drawer
 
                 ContentNavigationDrawer:
-
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer
